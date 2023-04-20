@@ -13,7 +13,6 @@ Options:
   -f --file   Specify CSV input file to format (required)
 
 """
-import numpy as np
 import pandas as pd
 from docopt import docopt
 
