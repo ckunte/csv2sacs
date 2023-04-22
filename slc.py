@@ -132,11 +132,6 @@ if __name__ == "__main__":
     #
     F = [" "]
     #
-    # CSV DATA FILE FROM METOCEAN TO USE
-    #
-    # Headers in CSV file:
-    # H (m), T(s), ThetaP PlatformNth(Deg), WS (m/s), CS5(m/s),  CS20(m/s),  CS30(m/s),  CS50(m/s),  CS70(m/s),  CS90(m/s), CS110(m/s), CS130(m/s), CS150(m/s), CS170(m/s)
-
     # -- END USER INPUTS --
 
     main(datfile, W, F, C)
