@@ -116,7 +116,7 @@ CURR      166.18    0.83   185.0
 
 ## Trivia
 
-At work, we've been looking to determine cyclic axial capacity of a fixed platform's drilled and grouted foundations in calcareous soils from storm time-history sets.[^1] The team is looking to generate pile loads from this using Bentley's SACS analysis suite. When totalled it adds to upwards of 30,000 discreet load cases.
+November 2022. At work, we've been looking to determine cyclic axial capacity of a fixed platform's drilled and grouted foundations in calcareous soils from storm time-history sets.[^1] The team is looking to generate pile loads from this using Bentley's SACS analysis suite. When totalled it adds to upwards of 30,000 discreet load cases.
 
 With the archaic fixed-format, reminiscent of FORTRAN, SACS is really unfriendly when it comes to developing user input files especially by hand, and in our case a seastate load input file. With 8,000 load cases, this requires generating about 127,000 unique lines of input, per history, error-free. Manually this is impracticable.
 
