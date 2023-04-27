@@ -133,7 +133,6 @@ The `slc.py` script is very specific to the structure of the CSV file and the or
 There is of course that opportunity to make this script generic (e.g., by updating the script to automatically count columns from either side and generate column index accordingly for further use) so that there is no need to re-factor the code --- should the data structure change, but this code solved our immediate problem.
 
 [^1]: The approach is described in a paper titled [Axial and lateral pile design in carbonate soils][p] by C.T. Erbrich, M.P. O'Neill, P. Clancy, M.F. Randolph, _Axial and lateral pile design in carbonate soils_, The University of Western Australia, 2010.
-
 [^2]: If current profile changes, then this script will require editing --- specifically to hardcoded current-specific indices at (a) the fourth print line (`# col 9-16`), (b) the fifth print line (`# col 17-24`), (c) the `range()` parameters, and (d) the elevation above mudline user input list `eam`.
 
 [p]: https://research-repository.uwa.edu.au/en/publications/axial-and-lateral-pile-design-in-carbonate-soils "C.T. Erbrich, et al., UWA, 2010."
