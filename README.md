@@ -1,4 +1,4 @@
-# CSV2SACS
+# csv2sacs: Convert Metocean data into a SACS seastate input file
 
 This repository contains two python scripts to (a) sanitise a CSV file, and (b) convert the sanitised CSV file into a SACS sea state input file.
 
@@ -116,13 +116,11 @@ CURR      166.18    0.83   185.0
 
 ## Trivia
 
-November 2022. At work, we've been looking to determine cyclic axial capacity of a fixed platform's drilled and grouted foundations in calcareous soils from storm time-history sets.[^1] The team is looking to generate pile loads from this using Bentley's SACS analysis suite. When totalled it adds to upwards of 30,000 discreet load cases.
+At work, we've been looking to determine cyclic axial capacity of a fixed platform's drilled and grouted foundations in calcareous soils from storm time-history sets.[^1] The team is looking to generate pile loads from this using Bentley's SACS analysis suite. When totalled it adds to upwards of 30,000 discreet load cases.
 
-With the archaic fixed-format, reminiscent of FORTRAN, SACS is really unfriendly when it comes to developing user input files especially by hand, and in our case a seastate load input file. With 8,000 load cases, this requires generating about 127,000 unique lines of input, per history, error-free. Manually this is impracticable.
+With the archaic fixed-format, SACS is unfriendly to developing user-input files especially by hand, and in our case seastate load input file(s). With 8,000 load cases, this requires generating about 127,000 unique lines of input, per history, error-free. Manually this is impracticable.
 
-I volunteered to find a way to automate this, if storm history were made available in comma separated value (CSV) files, which our Metocean team kindly did make. Last weekend, I rolled up sleeves and began coding in earnest in python, using [pandas] dataframe structure, to turn thousands of lines of Metocean data into hundreds of thousands of ungodly SACS input. I am glad that I now have a working script that does this in a couple of seconds.
-
-The `slc.py` script is very specific to the structure of the CSV file and the order in which data parameters occur. The first three columns represent wave data (height, period, and direction), and the last ten columns (to be aligned with `eam` list) represent current speed at ten intervals from water surface to seabed in decreasing order.[^2] However, SACS requires this to be input in the increasing order, and therefore the ranges are reversed (aligned with `eam`) and in negative increments to get appropriate column indices. Other than that, this script just re-prints data from the dataframe in a fixed format that SACS requires. Here's how it works:
+Volunteering to automate this, I got the script `slc.py` working, which converts thousands lines of Metocean data comma separated value (CSV) files into hundreds of thousands of SACS input lines. The script does this in seconds. It is very specific to the structure of the CSV file and the order in which data parameters occur. The first three columns represent wave data (height, period, and direction), and the last ten columns (to be aligned with `eam` list) represent current speed at ten intervals from water surface to seabed in decreasing order.[^2] However, SACS requires this to be input in the increasing order, and therefore the ranges are reversed (aligned with `eam`) and in negative increments to get appropriate column indices. Other than that, this script just re-prints data from the dataframe in a fixed format that SACS requires. Here's how it works:
 
 1. Loads the data from a CSV file, input at command line, into a dataframe
 2. Prints a line `FILE B` for a standalone seastate file
@@ -130,9 +128,10 @@ The `slc.py` script is very specific to the structure of the CSV file and the or
 4. Prints `WAVE` cards from wave data in the first three columns
 5. Prints `CURR` cards (incl. a multi-line local loop) from current data
 
-There is of course that opportunity to make this script generic (e.g., by updating the script to automatically count columns from either side and generate column index accordingly for further use) so that there is no need to re-factor the code --- should the data structure change, but this code solved our immediate problem.
+There is of course an opportunity to make this script generic (e.g., by updating the script to automatically count columns from either side and generate column index accordingly for further use) so that there is no need to re-factor the code --- should the data structure change, but this code solved our immediate problem.
 
 [^1]: The approach is described in a paper titled [Axial and lateral pile design in carbonate soils][p] by C.T. Erbrich, M.P. O'Neill, P. Clancy, M.F. Randolph, _Axial and lateral pile design in carbonate soils_, The University of Western Australia, 2010.
+
 [^2]: If current profile changes, then this script will require editing --- specifically to hardcoded current-specific indices at (a) the fourth print line (`# col 9-16`), (b) the fifth print line (`# col 17-24`), (c) the `range()` parameters, and (d) the elevation above mudline user input list `eam`.
 
 [p]: https://research-repository.uwa.edu.au/en/publications/axial-and-lateral-pile-design-in-carbonate-soils "C.T. Erbrich, et al., UWA, 2010."
