@@ -1,6 +1,6 @@
 # csv2sacs: Convert Metocean data into a SACS seastate input file
 
-This repository contains two python scripts to (a) sanitise a CSV file, and (b) convert the sanitised CSV file into a SACS sea state input file.
+This repository contains two python scripts to (a) sanitise a CSV file, and (b) convert the sanitised CSV file into a SACS sea state input file. A version of this readme is available as [a standalone PDF file](./README.pdf).
 
 ## Scope
 
